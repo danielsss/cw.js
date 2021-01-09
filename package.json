@@ -1,0 +1,30 @@
+{
+  "name": "cw.js",
+  "version": "1.0.10",
+  "description": "",
+  "main": "dist/bin/cw.js",
+  "scripts": {
+    "start": "ts-node ./src/bin/cw.ts",
+    "compile": "rm -rf ./dist && tsc --build tsconfig.json",
+    "lint": "eslint ./src --ext .js,.ts --fix"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.823.0",
+    "chalk": "^4.1.0",
+    "commander": "^6.2.1",
+    "debug": "^4.3.1",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.20",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "typescript": "^4.1.3"
+  },
+  "repository": {
+    "url": "https://github.com/danielsss/cw.js.git"
+  },
+  "author": "danielsss",
+  "license": "MIT"
+}

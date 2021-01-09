@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "stripInternal": true,
+    "pretty": true,
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "lib": ["es2020", "dom"],
+    "sourceMap": true,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "src",
+    "src/bin"
+  ]
+}

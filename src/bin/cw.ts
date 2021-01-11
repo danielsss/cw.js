@@ -51,10 +51,7 @@ async function main(): Promise<void> {
   text.stop(() => stop = true);
   loading.send('Loading done ...');
   while (stop === false) {
-    if (stop) {
-      break;
-    }
-
+    if (stop) { break; }
     await text.output();
   }
 }

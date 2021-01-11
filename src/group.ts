@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import * as inquirer from 'inquirer';
 
 import Base from './base';
 import Loading from './loading';
@@ -18,6 +19,22 @@ class CloudWatchLogGroup extends Base {
     this.loading.send('Loading log groups ...');
     const groups = await this.cloudWatch.describeLogGroups().promise();
     return _.find(groups.logGroups, group => group.logGroupName === name);
+  }
+
+  async choice(): Promise<string> {
+    const result = await this.cloudWatch.describeLogGroups().promise();
+    const groups = result.logGroups;
+    const choices = [];
+    for (let i = 0; i < groups.length; i++) {
+      choices.push(groups[i].logGroupName);
+    }
+    return inquirer.prompt([{
+      type: 'list',
+      name: 'group',
+      message: 'You can choice a group name for log stream.',
+      choices
+    }])
+      .then(answer => answer.group);
   }
 }
 

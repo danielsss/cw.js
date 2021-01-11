@@ -20,17 +20,27 @@ async function main(): Promise<void> {
   const error = err => {
     if (err.code === 'InvalidSignatureException') {
       program.help(helpful('Error: ' + err.message));
+    } else {
+      console.error(err);
+      process.exit(1);
     }
   };
   // Initial classes
   const group = new CloudWatchLogGroup(cloudWatch, loading);
-  await group.getGroupBy(program.groupName).catch(error);
+  let name = program.groupName;
+  if (!name) {
+    name = await group.choice().catch(error);
+  }
 
   const stream = new CloudWatchLogStream(cloudWatch, loading);
-  const latest = await stream.latestStream(program.groupName);
+  const latest = await stream.latestStream(name).catch(error);
 
   const text = new CloudWatchLogText(cloudWatch, loading);
-  text.group(program.groupName);
+  text.group(name);
+  if (!latest || !latest.hasOwnProperty('logStreamName')) {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    throw new Error(`${name} does not contain streams`);
+  }
   text.stream(latest.logStreamName);
 
   let stop = false;

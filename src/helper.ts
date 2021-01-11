@@ -57,9 +57,5 @@ export default function (): commander.Command {
     program.help(helpful('Error: <-r, --region>'));
   }
 
-  if (!program.groupName) {
-    program.help(helpful('Error: <-g, --group-name>'));
-  }
-
   return program;
 }

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import * as chalk from 'chalk';
 import helper from '../helper';
 import Loading from '../loading';
 import CloudWatchLogGroup from '../group';
@@ -20,6 +21,9 @@ async function main(): Promise<void> {
   const error = err => {
     if (err.code === 'InvalidSignatureException') {
       program.help(helpful('Error: ' + err.message));
+    } else if (err.originalError && err.originalError.code === 'NetworkingError') {
+      console.error(chalk.red('"cw.js" is a network tool. Make sure your network is available.'));
+      program.help(helpful(''));
     } else {
       console.error(err);
       process.exit(1);
@@ -56,7 +60,7 @@ async function main(): Promise<void> {
 }
 
 const error = err => {
-  console.error(err);
+  console.error('Main:Error', err);
   process.exit(1);
 };
 

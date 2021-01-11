@@ -1,3 +1,5 @@
+![introduce](https://github.com/danielsss/cw.js/blob/main/docs/introduce.gif)
+
 # 🔥 cw.js
 
 A command named "cw" that keeps reading latest cloudWatch log stream to local.

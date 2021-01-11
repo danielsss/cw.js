@@ -3,6 +3,9 @@
   "version": "1.0.10",
   "description": "",
   "main": "dist/bin/cw.js",
+  "bin": {
+    "cw": "./dist/bin/cw.js"
+  },
   "scripts": {
     "start": "ts-node ./src/bin/cw.ts",
     "compile": "rm -rf ./dist && tsc --build tsconfig.json",

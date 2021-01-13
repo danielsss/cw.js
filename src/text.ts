@@ -1,11 +1,13 @@
 import * as chalk from 'chalk';
+import * as Debug from 'debug';
+import * as utils from './utils';
 
 import Base from './base';
 import Loading from './loading';
 
 import { CloudWatchLogs } from 'aws-sdk';
-import { EventEmitter } from 'events';
 
+const debug = Debug('cw.js:text');
 
 class CloudWatchLogText extends Base {
   protected groupName: string;
@@ -14,11 +16,8 @@ class CloudWatchLogText extends Base {
   protected previous: string = null;
   protected startTime: number = Date.now();
 
-  private event: EventEmitter;
-
   constructor(cloudWatch: CloudWatchLogs, loading: Loading) {
     super(cloudWatch, loading);
-    this.event = new EventEmitter();
   }
 
   group(name: string): CloudWatchLogText {
@@ -33,11 +32,15 @@ class CloudWatchLogText extends Base {
 
   async output() {
     const logs = await this.getLatestLogs();
+    debug('latest log: %j', logs);
+    if (logs.events.length <= 0) {
+      await utils.delay(1000);
+    }
     for (const e of logs.events) {
       const t = new Date(e.timestamp);
-      const head = chalk.green('[CloudWatch:Date:%s]');
+      const head = chalk.green('[CloudWatch:Time:%s]');
       console.info(head + ' - %s', t.toLocaleString(), e.message);
-      this.startTime = e.timestamp;
+      this.startTime = e.timestamp + 1;
     }
   }
 
@@ -64,10 +67,6 @@ class CloudWatchLogText extends Base {
       this.previous = logs.nextBackwardToken || null;
       return logs;
     });
-  }
-
-  stop(fn) {
-    this.event.once('stop', fn);
   }
 }
 

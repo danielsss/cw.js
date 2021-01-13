@@ -47,13 +47,13 @@ async function main(): Promise<void> {
   }
   text.stream(latest.logStreamName);
 
-  let stop = false;
-  text.stop(() => stop = true);
   loading.send('Loading done ...');
-  while (stop === false) {
-    if (stop) { break; }
-    await text.output();
-  }
+
+  let err = null;
+  do {
+    await text.output().catch(e => err = e);
+  } while (err === null);
+  console.error(err);
 }
 
 const error = err => {

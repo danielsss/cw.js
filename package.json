@@ -9,7 +9,9 @@
   "scripts": {
     "start": "ts-node ./src/bin/cw.ts",
     "compile": "rm -rf ./dist && tsc --build tsconfig.json",
-    "lint": "eslint ./src --ext .js,.ts --fix"
+    "lint": "eslint ./src --ext .js,.ts --fix",
+    "alpha": "npm version prerelease --preid='alpha'",
+    "release": "npm run compile && npm run alpha && npm publish"
   },
   "dependencies": {
     "aws-sdk": "^2.823.0",

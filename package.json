@@ -32,6 +32,15 @@
   "repository": {
     "url": "https://github.com/danielsss/cw.js.git"
   },
+  "keywords": [
+    "cw.js",
+    "cloudwatch logs",
+    "cloudwatch log",
+    "cloudwatch stream",
+    "cw.js log stream",
+    "aws log stream",
+    "aws log"
+  ],
   "author": "danielsss",
   "license": "MIT"
 }

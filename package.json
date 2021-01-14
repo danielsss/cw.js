@@ -41,6 +41,11 @@
     "aws log stream",
     "aws log"
   ],
+  "files": [
+    "dist/",
+    "package.json",
+    "package-lock.json"
+  ],
   "author": "danielsss",
   "license": "MIT"
 }

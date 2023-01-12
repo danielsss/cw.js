@@ -9,6 +9,7 @@ import CloudWatchLogText from '../text';
 import { helpful } from '../helper';
 import { CloudWatchLogs, ECS } from 'aws-sdk';
 
+const ora = require('ora');
 const debug = require('debug')('cw.js:bin:cmd');
 
 async function main(): Promise<void> {
@@ -30,11 +31,14 @@ async function main(): Promise<void> {
       process.exit(1);
     }
   };
-  // Initial classes
+  const spinner = ora('dots').start();
+  spinner.text = 'waiting to load group names ...';
+  spinner.color = 'green';
+
   const group = new CloudWatchLogGroup(ecs, cloudWatch, loading);
   let name = program.groupName;
   if (!name) {
-    name = await group.choice().catch(error);
+    name = await group.choice(spinner).catch(error);
   }
 
   const stream = new CloudWatchLogStream(ecs, cloudWatch, loading);

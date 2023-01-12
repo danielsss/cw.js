@@ -11,15 +11,18 @@
     "compile": "rm -rf ./dist && tsc --build tsconfig.json",
     "lint": "eslint ./src --ext .js,.ts --fix",
     "alpha": "npm version prerelease --preid='alpha'",
-    "release": "npm run compile && npm run alpha && npm publish"
+    "release": "npm run compile && npm run alpha && npm publish",
+    "test": "node dist/bin/cw.js -c 4 --profile en --region us-east-1"
   },
   "dependencies": {
     "aws-sdk": "^2.823.0",
     "chalk": "^4.1.0",
     "commander": "^6.2.1",
-    "debug": "^4.3.1",
+    "debug": "^4.3.4",
     "inquirer": "^7.3.3",
-    "lodash": "^4.17.20"
+    "inquirer-search-list": "^1.2.6",
+    "lodash": "^4.17.21",
+    "ora": "^5.4.1"
   },
   "devDependencies": {
     "@types/inquirer": "^7.3.1",

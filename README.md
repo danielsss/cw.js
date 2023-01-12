@@ -1,5 +1,5 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[](https://img.shields.io/github/package-json/v/danielsss/cw.js)
+![](https://img.shields.io/github/package-json/v/danielsss/cw.js)
 
 # 🔥Reading log streams from AWS CloudWatch 🔥
 

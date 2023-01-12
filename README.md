@@ -9,4 +9,10 @@
 It supports reading logs in a cluster mode which means you can read all tasks in a window.
 
 
-### [See command details](./docs/usage.md)
+# Usage
+
+[See command details](./docs/usage.md) or run the following command
+
+```shell
+cw --help
+```

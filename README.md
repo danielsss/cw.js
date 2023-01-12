@@ -2,11 +2,11 @@
 
 ![introduce-2](https://github.com/danielsss/cw.js/blob/main/docs/introduce-2.gif)
 
-# 🔥 cw.js
+# 🔥Reading log streams from AWS CloudWatch 🔥
 
-A command named "cw" that keeps reading latest of cloudWatchLogs stream to local/terminal.
+`cw.js` is written by `Typescript` and based on [AWS SDK](https://github.com/aws/aws-sdk-js) CloudWatchLogs and ECS.
 
-`cw.js` is written in `Typescript` and based on [AWS SDK](https://github.com/aws/aws-sdk-js) CloudWatchLogs.
+It supports reading logs in a cluster mode which means you can read all tasks in a window.
 
 
 ### [See command details](./docs/usage.md)

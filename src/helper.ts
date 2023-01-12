@@ -17,12 +17,14 @@ export default function (): commander.Command {
     .name('cw')
     .usage('[Options]')
 
-    .option('-d, --debug', 'output extra debugging')
     .option('-a, --access-key-id <type>', 'specify aws access key id')
-    .option('-s, --secret-access-key <type>', 'specify aws secret access key')
-    .option('-r, --region <type>', 'specify aws region')
+    .option('-c, --cluster <type>', 'ECS cluster numbers')
+    .option('-d, --debug', 'output extra debugging')
     .option('-g, --group-name <type>', 'specify group name of cloud-watch service')
     .option('-p, --profile <type>', 'aws credential profile')
+    .option('-r, --region <type>', 'specify aws region')
+    .option('-s, --secret-access-key <type>', 'specify aws secret access key')
+
 
     .on('--help', () => {
       console.info('');

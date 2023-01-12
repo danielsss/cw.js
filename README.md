@@ -11,8 +11,20 @@ It supports reading logs in a cluster mode which means you can read all tasks in
 
 # Usage
 
-[See command details](./docs/usage.md) or run the following command
+Installing the `cw.js` as a global package.
 
-```shell
-cw --help
+```shell script
+$ npm i -g cw.js
 ```
+
+```shell script
+$ cw -c 4 --access-key-id "*" --secret-access-key "*" --region "cn-north-1" --group-name "*"
+```
+
+* OR
+
+```shell script
+$ cw --profile "${check from .aws/credentials}" --region "cn-north-1" --group-name "*"
+```
+
+There is a thing you need to know which makes sure the [credentials](https://docs.amazonaws.cn/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html) are stored to local configuration if you are going to use `--profile`.

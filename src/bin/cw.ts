@@ -6,17 +6,19 @@ import Loading from '../loading';
 import CloudWatchLogGroup from '../group';
 import CloudWatchLogStream from '../stream';
 import CloudWatchLogText from '../text';
-
 import { helpful } from '../helper';
-import { CloudWatchLogs } from 'aws-sdk';
+import { CloudWatchLogs, ECS } from 'aws-sdk';
+
+const debug = require('debug')('cw.js:bin:cmd');
 
 async function main(): Promise<void> {
   const program = helper();
-
+  debug(program);
   const loading = new Loading();
   loading.listen();
 
   const cloudWatch = new CloudWatchLogs({region: program.region});
+  const ecs = new ECS({region: program.region});
 
   const error = err => {
     if (err.code === 'InvalidSignatureException') {
@@ -30,23 +32,18 @@ async function main(): Promise<void> {
     }
   };
   // Initial classes
-  const group = new CloudWatchLogGroup(cloudWatch, loading);
+  const group = new CloudWatchLogGroup(ecs, cloudWatch, loading);
   let name = program.groupName;
   if (!name) {
     name = await group.choice().catch(error);
   }
 
-  const stream = new CloudWatchLogStream(cloudWatch, loading);
-  const latest = await stream.latestStream(name).catch(error);
+  const stream = new CloudWatchLogStream(ecs, cloudWatch, loading);
+  await stream.setup(name, !isNaN(program.clusters) ? Number(program.clusters) : 4).catch(error);
 
-  const text = new CloudWatchLogText(cloudWatch, loading);
+  const text = new CloudWatchLogText(ecs, cloudWatch, loading);
   text.group(name);
-  if (!latest || !latest.hasOwnProperty('logStreamName')) {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    throw new Error(`${name} does not contain streams`);
-  }
-  text.stream(latest.logStreamName);
-
+  text.streams(stream.tasks);
   loading.send('Loading done ...');
 
   let err = null;

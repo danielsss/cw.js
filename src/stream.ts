@@ -1,19 +1,35 @@
 import Base from './base';
 import Loading from './loading';
-import { CloudWatchLogs } from 'aws-sdk';
+import { CloudWatchLogs, ECS} from 'aws-sdk';
+
+const debug = require('debug')('cw.js:stream');
 
 class CloudWatchLogStream extends Base {
-  constructor(cloudWatch: CloudWatchLogs, loading: Loading) {
-    super(cloudWatch, loading);
+
+  public tasks: {id: string; name: string}[] = [];
+
+  constructor(
+    ecs: ECS,
+    cloudWatch: CloudWatchLogs,
+    loading: Loading
+  ) {
+    super(ecs, cloudWatch, loading);
   }
 
-  async latestStream(logGroupName: string): Promise<CloudWatchLogs.LogStream> {
+  async setup(logGroupName: string, cluster?: number) {
     const options = {
-      logGroupName, limit: 1, orderBy: 'LastEventTime', descending: true
+      logGroupName, limit: cluster || 4,
+      orderBy: 'LastEventTime', descending: true
     };
     this.loading.send('Loading log stream ...');
     const streams = await this.cloudWatch.describeLogStreams(options).promise();
-    return streams.logStreams[0];
+    for (const s of streams.logStreams) {
+      const name = s.logStreamName;
+      const arr = name.split('/');
+      this.tasks.push({ id: arr[arr.length - 1], name });
+    }
+
+    debug(this.tasks);
   }
 }
 

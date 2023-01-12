@@ -13,7 +13,6 @@ const debug = require('debug')('cw.js:bin:cmd');
 
 async function main(): Promise<void> {
   const program = helper();
-  debug(program);
   const loading = new Loading();
   loading.listen();
 
@@ -50,11 +49,11 @@ async function main(): Promise<void> {
   do {
     await text.output().catch(e => err = e);
   } while (err === null);
-  console.error(err);
+  debug(err);
 }
 
 const error = err => {
-  console.error('Main:Error', err);
+  debug(err);
   process.exit(1);
 };
 

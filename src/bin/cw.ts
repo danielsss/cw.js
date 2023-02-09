@@ -32,7 +32,7 @@ async function main(): Promise<void> {
     }
   };
   const spinner = ora('dots').start();
-  spinner.text = 'waiting to load group names ...';
+  spinner.text = "Waiting for loading group names ...';
   spinner.color = 'green';
 
   const group = new CloudWatchLogGroup(ecs, cloudWatch, loading);

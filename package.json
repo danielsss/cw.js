@@ -15,7 +15,7 @@
     "test": "node dist/bin/cw.js -c 4 --profile en --region us-east-1"
   },
   "dependencies": {
-    "aws-sdk": "^2.823.0",
+    "aws-sdk": "^2.1328.0",
     "chalk": "^4.1.0",
     "commander": "^6.2.1",
     "debug": "^4.3.4",

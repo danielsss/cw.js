@@ -79,7 +79,7 @@ class CloudWatchLogGroup extends Base {
     return inquirer.prompt([{
       type: 'search-list',
       name: 'group',
-      message: 'Search a group name',
+      message: 'Search/Select a group name',
       choices
     }]).then(answer => answer.group);
   }

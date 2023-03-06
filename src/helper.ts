@@ -24,6 +24,7 @@ export default function (): commander.Command {
     .option('-p, --profile <type>', 'aws credential profile')
     .option('-r, --region <type>', 'specify aws region')
     .option('-s, --secret-access-key <type>', 'specify aws secret access key')
+    .option('-lc, --local-cache', 'use local cache, if data are stored in local environment')
 
 
     .on('--help', () => {

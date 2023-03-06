@@ -1,18 +1,14 @@
 import Base from './base';
 import Loading from './loading';
-import { CloudWatchLogs, ECS} from 'aws-sdk';
+import { CloudWatchLogs, ECS } from 'aws-sdk';
 
 const debug = require('debug')('cw.js:stream');
 
 class CloudWatchLogStream extends Base {
 
-  public tasks: {id: string; name: string}[] = [];
+  public tasks: { id: string; name: string }[] = [];
 
-  constructor(
-    ecs: ECS,
-    cloudWatch: CloudWatchLogs,
-    loading: Loading
-  ) {
+  constructor(ecs: ECS, cloudWatch: CloudWatchLogs, loading: Loading) {
     super(ecs, cloudWatch, loading);
   }
 

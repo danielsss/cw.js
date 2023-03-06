@@ -32,13 +32,13 @@ async function main(): Promise<void> {
     }
   };
   const spinner = ora('dots').start();
-  spinner.text = 'Waiting for loading group names ...';
+  spinner.text = 'Waiting for loading group names [ Considering speed up, You can use "--local-cache" ] ...';
   spinner.color = 'green';
 
   const group = new CloudWatchLogGroup(ecs, cloudWatch, loading);
   let name = program.groupName;
   if (!name) {
-    name = await group.choice(spinner).catch(error);
+    name = await group.choice(spinner, program.localCache).catch(error);
   }
 
   const stream = new CloudWatchLogStream(ecs, cloudWatch, loading);

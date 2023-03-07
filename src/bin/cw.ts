@@ -7,7 +7,7 @@ import CloudWatchLogGroup from '../group';
 import CloudWatchLogStream from '../stream';
 import CloudWatchLogText from '../text';
 import { helpful } from '../helper';
-import { CloudWatchLogs, ECS } from 'aws-sdk';
+import { CloudWatchLogs } from 'aws-sdk';
 
 const ora = require('ora');
 const debug = require('debug')('cw.js:bin:cmd');
@@ -18,7 +18,7 @@ async function main(): Promise<void> {
   loading.listen();
 
   const cloudWatch = new CloudWatchLogs({region: program.region});
-  const ecs = new ECS({region: program.region});
+  // const ecs = new ECS({region: program.region});
 
   const error = err => {
     if (err.code === 'InvalidSignatureException') {
@@ -35,16 +35,16 @@ async function main(): Promise<void> {
   spinner.text = 'Waiting for loading group names [ Considering speed up, You can use "--local-cache" ] ...';
   spinner.color = 'green';
 
-  const group = new CloudWatchLogGroup(ecs, cloudWatch, loading);
+  const group = new CloudWatchLogGroup(cloudWatch, loading);
   let name = program.groupName;
   if (!name) {
     name = await group.choice(spinner, program.localCache).catch(error);
   }
 
-  const stream = new CloudWatchLogStream(ecs, cloudWatch, loading);
+  const stream = new CloudWatchLogStream(cloudWatch, loading);
   await stream.setup(name, !isNaN(program.clusters) ? Number(program.clusters) : 4).catch(error);
 
-  const text = new CloudWatchLogText(ecs, cloudWatch, loading);
+  const text = new CloudWatchLogText(cloudWatch, loading);
   text.group(name);
   text.streams(stream.tasks);
   loading.send('Loading done ...');

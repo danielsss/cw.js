@@ -1,6 +1,6 @@
 import Base from './base';
 import Loading from './loading';
-import { CloudWatchLogs, ECS } from 'aws-sdk';
+import { CloudWatchLogs } from 'aws-sdk';
 
 const debug = require('debug')('cw.js:stream');
 
@@ -8,8 +8,8 @@ class CloudWatchLogStream extends Base {
 
   public tasks: { id: string; name: string }[] = [];
 
-  constructor(ecs: ECS, cloudWatch: CloudWatchLogs, loading: Loading) {
-    super(ecs, cloudWatch, loading);
+  constructor(cloudWatch: CloudWatchLogs, loading: Loading) {
+    super(cloudWatch, loading);
   }
 
   async setup(logGroupName: string, cluster?: number) {

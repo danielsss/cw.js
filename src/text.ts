@@ -2,7 +2,7 @@ import * as chalk from 'chalk';
 import * as utils from './utils';
 import Base from './base';
 import Loading from './loading';
-import { CloudWatchLogs, ECS } from 'aws-sdk';
+import { CloudWatchLogs } from 'aws-sdk';
 
 
 class CloudWatchLogText extends Base {
@@ -12,8 +12,8 @@ class CloudWatchLogText extends Base {
   protected previous: string = null;
   protected startTime: number = Date.now();
 
-  constructor(ecs: ECS, cloudWatch: CloudWatchLogs, loading: Loading) {
-    super(ecs, cloudWatch, loading);
+  constructor(cloudWatch: CloudWatchLogs, loading: Loading) {
+    super(cloudWatch, loading);
   }
 
   group(name: string): CloudWatchLogText {

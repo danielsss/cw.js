@@ -1,7 +1,7 @@
 import * as inquirer from 'inquirer';
 import Base from './base';
 import Loading from './loading';
-import { CloudWatchLogs, ECS } from 'aws-sdk';
+import { CloudWatchLogs } from 'aws-sdk';
 import { readFileSync, mkdirSync, existsSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
@@ -50,8 +50,8 @@ class CloudWatchLogGroup extends Base {
 
   protected storage: Storage;
 
-  constructor(ecs: ECS, cloudWatch: CloudWatchLogs, loading: Loading) {
-    super(ecs, cloudWatch, loading);
+  constructor(cloudWatch: CloudWatchLogs, loading: Loading) {
+    super(cloudWatch, loading);
     this.storage = new Storage();
   }
 

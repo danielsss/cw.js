@@ -30,7 +30,7 @@ class CloudWatchLogText extends Base {
     return this;
   }
 
-  async output() {
+  async output(spinner) {
     const events = {};
     for (const stream of this.streamNames) {
       events[stream.id] = await this.latestLogEvents(stream.name);
@@ -38,6 +38,10 @@ class CloudWatchLogText extends Base {
 
     if (Object.keys(events).length <= 0) {
       await utils.delay(1000);
+    }
+
+    if (spinner) {
+      spinner.stop();
     }
 
     for (const key in events) {

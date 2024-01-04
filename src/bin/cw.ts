@@ -34,7 +34,7 @@ async function main(): Promise<void> {
     }
   };
   const spinner = ora('dots').start();
-  spinner.text = 'Waiting for loading group names [ Considering speed up, You can use "--local-cache" ] ...';
+  spinner.text = '... ... ... ... ... ...';
   spinner.color = 'green';
 
   const group = new CloudWatchLogGroup(cloudWatch, loading);
@@ -53,7 +53,7 @@ async function main(): Promise<void> {
 
   let err = null;
   do {
-    await text.output().catch(e => err = e);
+    await text.output(spinner).catch(e => err = e);
   } while (err === null);
   debug(err);
 }

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('aws-sdk/lib/maintenance_mode_message').suppress = true;
+
 import * as chalk from 'chalk';
 import helper from '../helper';
 import Loading from '../loading';

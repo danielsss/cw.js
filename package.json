@@ -19,7 +19,7 @@
     "chalk": "^4.1.0",
     "commander": "^6.2.1",
     "debug": "^4.3.4",
-    "inquirer": "^7.3.3",
+    "inquirer": "^8.2.7",
     "inquirer-search-list": "^1.2.6",
     "lodash": "^4.17.21",
     "ora": "^5.4.1"

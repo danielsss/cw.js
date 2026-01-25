@@ -21,7 +21,7 @@
     "debug": "^4.3.4",
     "inquirer": "^7.3.3",
     "inquirer-search-list": "^1.2.6",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "ora": "^5.4.1"
   },
   "devDependencies": {
